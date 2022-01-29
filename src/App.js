@@ -18,17 +18,28 @@ function App() {
        setAlert(null)
        },1500)
   }
-  const toggleMode =()=>{
+const removeBodyClasses=()=>{
+document.body.classList.remove('bg-light')
+document.body.classList.remove('bg-dark')
+document.body.classList.remove('bg-warning')
+document.body.classList.remove('bg-danger')
+document.body.classList.remove('bg-success')
+}
+
+  const toggleMode =(cls)=>{
+    removeBodyClasses()
+   // console.log(cls)
+    document.body.classList.add('bg-'+cls)
     if(mode==='dark'){
       setMode('light')
       document.body.style.backgroundColor='white'
       showAlert('Light Mode has been Enabled',"success")
-      document.title='Text Utility-Light Mode'
+      //document.title='Text Utility-Light Mode'
     }else{
       setMode('dark')
-      document.body.style.backgroundColor='gray'
+      document.body.style.backgroundColor='#042743'
       showAlert('Dark Mode has been Enabled',"success")
-      document.title='Text Utility-Dark Mode'
+      //document.title='Text Utility-Dark Mode'
     }
   }
   return (
@@ -39,10 +50,10 @@ function App() {
      
     <Routes>
         <Route path="/" element={ <TextForm heading="Enter the Text to Analyse" mode={mode} showAlert={showAlert}/> } />
-        <Route path="/about" element={ <About /> } />
+        <Route path="/about" element={ <About mode={mode}/> } />
         
       </Routes>
-      <About />
+      
     </div>
     
      
