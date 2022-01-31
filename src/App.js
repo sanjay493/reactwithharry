@@ -65,15 +65,27 @@
 
 
 import React,{Component} from 'react';
+import Navbar from './components/ClassBased/Navbar';
 import News from './components/ClassBased/News';
-import Header from "./components/Header";
+import {Routes,Route} from 'react-router-dom'
 
 export default class App extends Component {
+  pageSize=15
   render(){
     return(
       <>
-      <Header />
-      <News pageSize={7}/>
+      <Navbar />
+      <Routes>
+      
+        <Route path="/sport" element={ <News pageSize={this.pageSize} counrty="in" category='sport'/> } />
+        <Route path="/" element={ <News pageSize={this.pageSize} counrty="in" category='general'/> } />
+        <Route path="/general" element={ <News pageSize={this.pageSize} counrty="in" category='general'/> } />
+        <Route path="/entertainment" element={ <News pageSize={this.pageSize} counrty="in" category='entertainment'/> } />
+        <Route path="/business" element={ <News pageSize={this.pageSize} counrty="in" category='business'/> } />
+        <Route path="/health" element={ <News pageSize={this.pageSize} counrty="in" category='health'/> } />
+        <Route path="/technology" element={ <News pageSize={this.pageSize} counrty="in" category='technology'/> } />
+        <Route path="/science" element={ <News pageSize={this.pageSize} counrty="in" category='science'/> } />
+      </Routes>
       </>
     )
   }
