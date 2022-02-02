@@ -34,7 +34,8 @@ export default class News extends Component {
       document.title=`${this.capitalizeFirstLetter(this.props.category)}-NewsMonkey`
       }
      async updateNews(){
-        const url =`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7198450ec96349bea7dce10dc7d6a0d4&pageSize=${this.props.pageSize}&page=${this.state.page}`;
+       this.props.setProgress(10);
+        const url =`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=2ac0f6cc12d64028b35f1687b67a8cc0&pageSize=${this.props.pageSize}&page=${this.state.page}`;
         this.setState({loading:true})
         let data = await fetch(url);
         let parseData=await data.json()
@@ -44,7 +45,7 @@ export default class News extends Component {
               totalResults:parseData.totalResults,
               loading:false
           })  
-
+      //this.setProgress(100)
      }
      async componentDidMount(){
         this.updateNews(); 
@@ -63,7 +64,7 @@ export default class News extends Component {
 
     fetchMoreData = async () => {
         this.setState({page:this.state.page+1})
-        const url =`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=7198450ec96349bea7dce10dc7d6a0d4&pageSize=${this.props.pageSize}&page=${this.state.page}`;
+        const url =`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=2ac0f6cc12d64028b35f1687b67a8cc0&pageSize=${this.props.pageSize}&page=${this.state.page}`;
         
         let data = await fetch(url);
         let parseData=await data.json()
