@@ -64,43 +64,46 @@
 // export default App;
 
 
-import React,{Component} from 'react';
-import Navbar from './components/ClassBased/Navbar';
-import News from './components/ClassBased/News';
+// 
+import React,{useEffect,useState} from 'react';
+import Navbar from './components/functionBased/Navbar';
+import News from './components/functionBased/News';
 import {Routes,Route} from 'react-router-dom'
 import LoadingBar from 'react-top-loading-bar'
 
-export default class App extends Component {
-  pageSize=15
-  apikey=process.env.REACT_APP_NEWS_API
-  state={
-    progress:0
-  }
-  setProgress=(progress)=>{
-    this.setState({progress:progress})
-  }
-  render(){
+ const App =()=> {
+  const pageSize=20
+  const apikey=process.env.REACT_APP_NEWS_API
+  
+const [progress,setProgress]=useState(0)
+
+  
+useEffect(()=>{
+  setProgress({progress:progress})
+},[])
+ 
     return(
       <>
       <Navbar />
       <LoadingBar
         color='#f11946'
         height={3}
-        progress={this.state.progress}        
+        progress={progress}        
       />
       <Routes>
       
-        <Route path="/sport" element={ <News setProgress={this.setProgress} apikey={this.apikey} pageSize={this.pageSize} counrty="in" category='sport'/> } />
-        <Route path="/" element={ <News setProgress={this.setProgress} apikey={this.apikey} pageSize={this.pageSize} counrty="in" category='general'/> } />
-        <Route path="/general" element={ <News setProgress={this.setProgress} apikey={this.apikey} pageSize={this.pageSize} counrty="in" category='general'/> } />
-        <Route path="/entertainment" element={ <News setProgress={this.setProgress} apikey={this.apikey} pageSize={this.pageSize} counrty="in" category='entertainment'/> } />
-        <Route path="/business" element={ <News setProgress={this.setProgress} apikey={this.apikey} pageSize={this.pageSize} counrty="in" category='business'/> } />
-        <Route path="/health" element={ <News setProgress={this.setProgress} apikey={this.apikey} pageSize={this.pageSize} counrty="in" category='health'/> } />
-        <Route path="/technology" element={ <News setProgress={this.setProgress} apikey={this.apikey} pageSize={this.pageSize} counrty="in" category='technology'/> } />
-        <Route path="/science" element={ <News setProgress={this.setProgress} apikey={this.apikey} pageSize={this.pageSize} counrty="in" category='science'/> } />
+        <Route path="/sport" element={ <News setProgress={setProgress} apikey={apikey} pageSize={pageSize} counrty="in" category='sport'/> } />
+        <Route path="/" element={ <News setProgress={setProgress} apikey={apikey} pageSize={pageSize} counrty="in" category='general'/> } />
+        <Route path="/general" element={ <News setProgress={setProgress} apikey={apikey} pageSize={pageSize} counrty="in" category='general'/> } />
+        <Route path="/entertainment" element={ <News setProgress={setProgress} apikey={apikey} pageSize={pageSize} counrty="in" category='entertainment'/> } />
+        <Route path="/business" element={ <News setProgress={setProgress} apikey={apikey} pageSize={pageSize} counrty="in" category='business'/> } />
+        <Route path="/health" element={ <News setProgress={setProgress} apikey={apikey} pageSize={pageSize} counrty="in" category='health'/> } />
+        <Route path="/technology" element={ <News setProgress={setProgress} apikey={apikey} pageSize={pageSize} counrty="in" category='technology'/> } />
+        <Route path="/science" element={ <News setProgress={setProgress} apikey={apikey} pageSize={pageSize} counrty="in" category='science'/> } />
       </Routes>
       </>
     )
-  }
+  
 }
 
+export default App
